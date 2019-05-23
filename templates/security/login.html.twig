@@ -3,20 +3,23 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<form method="post">
+<form method="post" style="margin : 5rem;" class="text-center">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail" class="sr-only">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <h1 class="h1">Connexion</h1>
+    <p>Bonjour et bienvenue sur Alternatives Pro, pour accéder à votre espace sécurisé, nous vous invitions à compléter les éléments suivants</p>
+    <div style="margin : 2rem;" >
+        <label for="inputEmail" style="font-weight: bold" >Email</label>
+        <input style="width: 40%; margin:auto" type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control text-center" placeholder="Email" required autofocus>
+        <label for="inputPassword" style="font-weight: bold; margin-top: 1rem;">Password</label>
+        <input style="width: 40%; margin:auto" type="password" name="password" id="inputPassword" class="form-control text-center" placeholder="Password" required>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+        <input type="hidden" name="_csrf_token"
+            value="{{ csrf_token('authenticate') }}"
+        >
+    </div>
 
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
@@ -33,4 +36,5 @@
         Sign in
     </button>
 </form>
+
 {% endblock %}
