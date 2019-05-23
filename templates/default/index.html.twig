@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %} 
+{% block title %}Acceuil - Reconversion Pro
+{% endblock %} 
+{% block body %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous">
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        body {
+            min-height: 75rem;
+            padding-top: 4.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+    <div id="content">
+        <header class="header" id="page-header">
+            <div class="content-wrap">
+                <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                    <a class="navbar-brand" href="login">Connexion</a>
+                </nav>
+
+            </div>
+        </header>
+
+        <div class="bandeau-top page-content" style="background-color: #407491;">
+
+            <div class="bandeau-text">
+                <div class="top-content">
+                    <p style=" padding: 1em; color: white; font-size: 3rem; text-align: center;">votre métier se transforme<br>
+                        <b>Devenez acteur de votre mobilité professionnelle</b></p>
+                </div>
+                <p class="register-link" style="text-align: center"><a style=" font-weight: bold;  border-radius: 20px; padding: 1em; margin: 1em; color: white; background-color: hotpink;" href="register" class="round-btn focus-btn">INSCRIVEZ-VOUS</a></p>
+            </div>
+
+        </div>
+
+    {% endblock %}
