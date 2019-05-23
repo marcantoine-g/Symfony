@@ -3,12 +3,29 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
-
+<div class="text-center" style="margin : 5rem">
+    <div style="margin: 5rem">
+        <h1 class="h1">Inscrivez-vous</h1>
+        <p>Bienvenue sur le site Alternatives Pro, nous vous invitons à compléter les éléments suivants pour mieux personnaliser nos échanges.</p>
+    </div>
+    <div class="form-sign">
     {{ form_start(registrationForm) }}
+        <div>
         {{ form_row(registrationForm.email) }}
         {{ form_row(registrationForm.plainPassword) }}
-
-        <button class="btn">Register</button>
+        </div>
+        <button class="btn btn-primary">Valider</button>
     {{ form_end(registrationForm) }}
+    </div>
+</div>
+<style>
+label{
+    display: block;
+    margin: 1rem;
+    font-weight: bold;
+}
+button {
+    margin: 1rem;
+}
+</style>
 {% endblock %}

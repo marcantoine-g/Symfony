@@ -1,20 +1,45 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello DefaultController!{% endblock %}
-
+{% extends 'base.html.twig' %} 
+{% block title %}Acceuil - Reconversion Pro
+{% endblock %} 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        body {
+            min-height: 75rem;
+            padding-top: 4.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div id="content">
+        <header class="header" id="page-header">
+            <div class="content-wrap">
+            </div>
+        </header>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/html/licence07/projet-symfony/src/Controller/DefaultController.php'|file_link(0) }}">src/Controller/DefaultController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/html/licence07/projet-symfony/templates/default/index.html.twig'|file_link(0) }}">templates/default/index.html.twig</a></code></li>
-    </ul>
-</div>
-{% endblock %}
+        <div class="bandeau-top page-content" style="background-color: #407491;">
+
+            <div class="bandeau-text">
+                <div class="top-content">
+                    <p style=" padding: 1em; color: white; font-size: 3rem; text-align: center;">votre métier se transforme<br>
+                        <b>Devenez acteur de votre mobilité professionnelle</b></p>
+                </div>
+                <p class="register-link" style="text-align: center"><a style=" font-weight: bold;  border-radius: 20px; padding: 1em; margin: 1em; color: white; background-color: hotpink;" href="register" class="round-btn focus-btn">INSCRIVEZ-VOUS</a></p>
+            </div>
+
+        </div>
+
+    {% endblock %}
