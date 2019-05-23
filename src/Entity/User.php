@@ -1,15 +1,13 @@
 <?php
-
 namespace App\Entity;
-
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -17,152 +15,85 @@ class User
      * @ORM\Column(type="integer")
      */
     private $id;
-
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
-
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="json")
      */
-    private $username;
-
+    private $roles = [];
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string The hashed password
+     * @ORM\Column(type="string")
      */
-    private $userfirstname;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $roles;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Message", mappedBy="envoyer")
-     */
-    private $messages;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Message", mappedBy="recevoir")
-     */
-    private $recevoirMessages;
-
-    public function __construct()
-    {
-        $this->messages = new ArrayCollection();
-        $this->recevoirMessages = new ArrayCollection();
-    }
-
+    private $password;
     public function getId(): ?int
     {
         return $this->id;
     }
-
     public function getEmail(): ?string
     {
         return $this->email;
     }
-
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
         return $this;
     }
-
-    public function getUsername(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
     {
-        return $this->username;
+        return (string) $this->email;
     }
-
-    public function setUsername(string $username): self
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
     {
-        $this->username = $username;
-
-        return $this;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+        return array_unique($roles);
     }
-
-    public function getUserfirstname(): ?string
+    public function getRole() : string
     {
-        return $this->userfirstname;
+        return $this->roles[0];
     }
-
-    public function setUserfirstname(string $userfirstname): self
-    {
-        $this->userfirstname = $userfirstname;
-
-        return $this;
-    }
-
-    public function getRoles(): ?string
-    {
-        return $this->roles;
-    }
-
-    public function setRoles(string $roles): self
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-
         return $this;
     }
-
     /**
-     * @return Collection|Message[]
+     * @see UserInterface
      */
-    public function getMessages(): Collection
+    public function getPassword(): string
     {
-        return $this->messages;
+        return (string) $this->password;
     }
-
-    public function addMessage(Message $message): self
+    public function setPassword(string $password): self
     {
-        if (!$this->messages->contains($message)) {
-            $this->messages[] = $message;
-            $message->setEnvoyer($this);
-        }
-
+        $this->password = $password;
         return $this;
     }
-
-    public function removeMessage(Message $message): self
-    {
-        if ($this->messages->contains($message)) {
-            $this->messages->removeElement($message);
-            // set the owning side to null (unless already changed)
-            if ($message->getEnvoyer() === $this) {
-                $message->setEnvoyer(null);
-            }
-        }
-
-        return $this;
-    }
-
     /**
-     * @return Collection|Message[]
+     * @see UserInterface
      */
-    public function getRecevoirMessages(): Collection
+    public function getSalt()
     {
-        return $this->recevoirMessages;
+        // not needed when using the "bcrypt" algorithm in security.yaml
     }
-
-    public function addRecevoirMessage(Message $recevoirMessage): self
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
     {
-        if (!$this->recevoirMessages->contains($recevoirMessage)) {
-            $this->recevoirMessages[] = $recevoirMessage;
-            $recevoirMessage->addRecevoir($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRecevoirMessage(Message $recevoirMessage): self
-    {
-        if ($this->recevoirMessages->contains($recevoirMessage)) {
-            $this->recevoirMessages->removeElement($recevoirMessage);
-            $recevoirMessage->removeRecevoir($this);
-        }
-
-        return $this;
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 }
